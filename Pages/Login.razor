@@ -1,0 +1,47 @@
+﻿@page "/login"
+
+@using EmptyBlazorApp1.Models;
+
+<div class="card">
+    <h4 class="card-header">Login</h4>
+    <div class="card-body">
+        <EditForm Model="@model" OnValidSubmit="OnValidSubmit">
+            <DataAnnotationsValidator />
+            <div class="form-group">
+                <label>Username</label>
+                <InputText @bind-Value="model.Email" class="form-control" />
+                <ValidationMessage For="@(() => model.Email)" />
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <InputText @bind-Value="model.Password" type="password" class="form-control" />
+                <ValidationMessage For="@(() => model.Password)" />
+            </div>
+            <button class="btn btn-primary">
+                Login
+            </button>
+           
+        </EditForm>
+    </div>
+</div>
+
+<div class="card">
+    <h4 class="card-header">Result</h4>
+    <div class="card-body">
+        @result
+    </div>
+</div>
+
+@code {
+    public LoginAccountForm model = new LoginAccountForm();
+    string result = "waiting";
+
+
+    private void OnValidSubmit()
+    {
+        result = $"valid submit, email: {model.Email}, password:{model.Password}";
+    }
+
+
+}
+
